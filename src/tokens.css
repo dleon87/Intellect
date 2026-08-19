@@ -1,0 +1,751 @@
+@import '@syncfusion/ej2-base/styles/tailwind.css';
+@import '@syncfusion/ej2-react-buttons/styles/tailwind.css';
+@import '@syncfusion/ej2-react-inputs/styles/tailwind.css';
+@import '@syncfusion/ej2-react-navigations/styles/tailwind.css';
+@import '@syncfusion/ej2-react-splitbuttons/styles/tailwind.css';
+@import '@syncfusion/ej2-react-calendars/styles/tailwind.css';
+@import '@syncfusion/ej2-react-dropdowns/styles/tailwind.css';
+@import '@syncfusion/ej2-react-layouts/styles/tailwind.css';
+@import '@syncfusion/ej2-react-popups/styles/tailwind.css';
+@import '@syncfusion/ej2-react-grids/styles/tailwind.css';
+@import '@syncfusion/ej2-react-pivotview/styles/tailwind.css';
+/* Full bundle (Badge, Message/Alert, Toast, …) — supersedes the old badge-only
+   import now that Message (the read-only banner) needs the same package. */
+@import '@syncfusion/ej2-notifications/styles/tailwind.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #561fb7;
+  /* DS Primary tint used for feedback surfaces / subtle badge fills */
+  --primary-lighter: #efe9fa;
+  /* Hub-post surface + body copy, read from the Hub & Spoke Figma file
+     (Grey/grey-100 and primary/dark-grey respectively). */
+  --grey-100: #f9fafc;
+  --primary-dark-grey: #4f5b68;
+  /* text/colour/link — the blue the design uses for an author's name. */
+  --link: #145fc8;
+  --primary-hover: #43188f;
+  --primary-pressed: #34136f;
+  --primary-disabled: #946bdb;
+
+  --danger: #cc293c;
+  --danger-hover: #a11c2b;
+  --danger-pressed: #85212d;
+  --danger-disabled: #f26172;
+
+  /* Semantic/info — DS "Banners & callouts only" color, per the token table. */
+  --info: #04728d;
+  --info-lighter: #e8f6fa;
+
+  --content-text: #111827;
+  --content-text-disabled: #9ca3af;
+  --placeholder-text: #6b7280;
+
+  --border: #d1d5db;
+  --border-light: #e5e7eb;
+
+  --surface: #ffffff;
+  --surface-alt2: #f3f4f6;
+  --surface-alt3: #e5e7eb;
+  /* Background/overlay-bg-color — the DS's modal scrim, per the router doc's
+     neutrals table. Was missing here; every dialog needs it, not just this one. */
+  --overlay-bg-color: #6b7280bf;
+
+  --icon: #6b7280;
+  --icon-hover: #374151;
+  --icon-disabled: #d1d5db;
+
+  --focus-ring: 0 0 0 4px var(--primary), 0 0 0 6px #fff;
+}
+
+/*
+  Token-first overrides for Syncfusion's Tailwind theme: bind e-btn/e-input
+  visuals to the Intellect DS token values above rather than the stock theme
+  defaults (C1). Governance rules referenced inline map to the
+  intellect-design-system skill.
+*/
+
+/* Buttons — B1/B2 mechanism: outlined/flat reuse filled hover values */
+.e-btn.e-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.e-btn.e-primary:hover,
+.e-btn.e-primary:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+.e-btn.e-primary:active {
+  background-color: var(--primary-pressed);
+  border-color: var(--primary-pressed);
+}
+.e-btn.e-primary:disabled {
+  background-color: var(--primary-disabled);
+  border-color: var(--primary-disabled);
+  color: #fff;
+  opacity: 1;
+}
+
+.e-btn:not(.e-primary):not(.e-danger) {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: #374151;
+}
+.e-btn:not(.e-primary):not(.e-danger):hover {
+  background-color: var(--surface-alt2);
+}
+.e-btn:not(.e-primary):not(.e-danger):active {
+  background-color: var(--surface-alt3);
+}
+
+.e-btn.e-outline.e-primary {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.e-btn.e-outline.e-primary:hover,
+.e-btn.e-outline.e-primary:focus {
+  background-color: var(--primary-hover);
+  color: #fff;
+}
+
+.e-btn.e-flat {
+  border-color: transparent !important;
+  background-color: transparent;
+}
+.e-btn.e-flat.e-primary {
+  color: var(--primary);
+  background-color: transparent;
+}
+.e-btn.e-flat.e-primary:hover,
+.e-btn.e-flat.e-primary:focus {
+  color: var(--primary-hover);
+  background-color: var(--primary-lighter);
+}
+.e-btn.e-flat.e-primary:active {
+  color: var(--primary-pressed);
+}
+.e-btn.e-flat.e-primary:disabled {
+  color: var(--primary-disabled);
+  background-color: transparent;
+  opacity: 1;
+}
+
+.e-btn:focus {
+  box-shadow: var(--focus-ring) !important;
+}
+
+/* Inputs — outlined box, never underline (C2) */
+.e-input-group,
+.e-input-group.e-control-wrapper {
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  background: var(--surface);
+  height: 40px;
+  align-items: center;
+}
+.e-input-group.e-input-focus,
+.e-input-group.e-control-wrapper.e-input-focus {
+  border-color: var(--primary) !important;
+  box-shadow: var(--focus-ring);
+}
+.e-input-group::before,
+.e-input-group::after {
+  display: none !important;
+}
+.e-input,
+.e-input-group input.e-input,
+textarea.e-input {
+  color: var(--content-text);
+}
+.e-input::placeholder {
+  color: var(--placeholder-text);
+}
+
+/* Tabs — Timeline/Tasks/Training/Guides underline. Content panel is unused:
+   tab content is rendered by React state in ProcedureHeader, not the Syncfusion
+   template slot, so Tab re-renders never remount/reset the timeline subtree. */
+.procedure-tabs .e-content {
+  display: none;
+}
+
+.title-edit-input {
+  min-width: 220px;
+}
+
+.tag-add-input {
+  min-width: 120px;
+  height: 28px;
+}
+
+
+.e-tab .e-toolbar-items {
+  background: transparent;
+  border-bottom: 1px solid var(--border-light);
+}
+.e-tab .e-toolbar-item.e-active .e-tab-wrap {
+  color: var(--primary);
+}
+.e-tab .e-toolbar-item .e-tab-wrap::before {
+  display: none;
+}
+.e-tab .e-toolbar-item.e-active .e-indicator {
+  background: var(--primary) !important;
+}
+.e-tab .e-tab-header .e-indicator {
+  background: var(--primary) !important;
+  height: 2px;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: var(--content-text);
+}
+
+/* Breadcrumb — earlier crumbs muted/linked, current page dark + emphasized */
+.e-breadcrumb .e-breadcrumb-item a.e-breadcrumb-text {
+  color: var(--placeholder-text);
+  font-weight: 500;
+  text-decoration: none;
+}
+.e-breadcrumb .e-breadcrumb-item a.e-breadcrumb-text:hover,
+.e-breadcrumb .e-breadcrumb-item a.e-breadcrumb-text:focus {
+  color: var(--content-text);
+  text-decoration: none;
+}
+/* Higher specificity than Syncfusion's own [data-active-item] rule (which
+   colors the current, non-clickable crumb the same muted gray as the links —
+   backwards from what we want: the current page should read as emphasized). */
+.e-breadcrumb .e-breadcrumb-item span.e-breadcrumb-text,
+.e-breadcrumb .e-breadcrumb-item[data-active-item] span.e-breadcrumb-text {
+  color: var(--content-text) !important;
+  font-weight: 600;
+}
+.e-breadcrumb .e-breadcrumb-separator {
+  color: var(--icon);
+  align-items: center;
+}
+
+/* Icon buttons — B4: square, Round Rectangle shape, size = hit area, glyph centered */
+.e-btn.icon-btn,
+.e-btn.icon-btn-dark,
+.e-btn.icon-btn-secondary {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Flat icon button — transparent, no border, used for the sidebar collapse toggle */
+.e-btn.icon-btn {
+  background: transparent;
+  border-color: transparent;
+}
+.e-btn.icon-btn:hover {
+  background: var(--surface-alt2);
+}
+
+/* Higher-specificity (.e-css.e-btn...) selectors are required here: Syncfusion's
+   own e-flat hover/focus rules ship at that specificity and otherwise win the
+   cascade, painting a light-gray fill that reads as a stray white box on the
+   dark sidebar. */
+.e-btn.icon-btn-dark,
+.e-css.e-btn.icon-btn-dark {
+  background: transparent !important;
+  border-color: transparent !important;
+  width: 36px;
+  height: 36px;
+}
+.e-btn.icon-btn-dark:hover,
+.e-css.e-btn.icon-btn-dark:hover,
+.e-btn.icon-btn-dark:focus,
+.e-css.e-btn.icon-btn-dark:focus,
+.e-btn.icon-btn-dark:active,
+.e-css.e-btn.icon-btn-dark:active {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: transparent !important;
+}
+
+/* Secondary icon button — white bg, bordered, used for Notifications / AI assistant */
+.e-btn.icon-btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.e-btn.icon-btn-secondary:hover {
+  background: var(--surface-alt2);
+}
+.e-btn.icon-btn-secondary:active {
+  background: var(--surface-alt3);
+}
+
+/* Filter chips — pill-shaped Buttons (Primary Outlined selected / Secondary Outlined unselected) */
+.e-btn.chip-btn {
+  border-radius: 9999px;
+  height: 32px;
+  padding: 0 14px;
+}
+
+/* "0 teams" — Secondary, Large (40px), Round Rectangle per B3 (no Full Round on labelled buttons) */
+.e-btn.team-pill {
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 16px;
+}
+
+/* Procedure cards — Syncfusion Card (e-card) supplies the surface; these bind it
+   to DS tokens and strip the library's default elevation for a flat, bordered card. */
+.e-card.procedure-card {
+  min-height: 200px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: none;
+  padding: 0;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.e-card.procedure-card:hover {
+  border-color: var(--border);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.e-card.procedure-card:focus-visible {
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+/* Badge — outlined variants (hub / tag pills). The library ships subtle fills for
+   the semantic ramps but no outline treatment, so it is added here token-bound. */
+.e-badge.badge-outline {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: #374151;
+  font-weight: 500;
+}
+.e-badge.badge-outline.badge-outline-primary {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.e-badge.e-badge-pill {
+  padding: 3px 10px;
+  font-size: 12px;
+  line-height: 16px;
+  height: auto;
+  border-radius: var(--radius-full, 9999px);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Link-style Button ("Add description") — text-only affordance, no chrome.
+   DS open decision #3 (Link action color: Primary purple vs the unused
+   Buttons/Link blue ramp) is unresolved, so this follows the purple the rest
+   of this screen's inline links already use rather than picking the blue. */
+.e-btn.link-btn,
+.e-css.e-btn.link-btn {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0;
+  height: auto;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary) !important;
+  text-transform: none;
+}
+.e-btn.link-btn:hover,
+.e-css.e-btn.link-btn:hover {
+  color: var(--primary-hover) !important;
+  background: transparent !important;
+  text-decoration: underline;
+}
+
+/* Avatar — the +N overflow chip reuses e-avatar's box with a neutral fill */
+/* Initials avatar — Primary fill, per the hub-owner treatment in the design. */
+.e-avatar.avatar-initials {
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+/* Declared after .avatar-initials (same specificity) so the "+N" overflow chip
+   keeps its neutral fill rather than picking up the Primary one. */
+.e-avatar.avatar-overflow {
+  background: var(--surface-alt3);
+  color: var(--content-text);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Report status chip ("COMPLETE") — neutral fill, uppercase. */
+.e-badge.badge-status {
+  background: var(--surface-alt2);
+  color: var(--content-text-alt1, #374151);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  height: auto;
+  line-height: 1.2;
+}
+
+/* HUB badge — straddles the avatar's bottom edge, so the avatar needs a
+   positioning context and the badge must not inherit e-badge's absolute
+   top-right default placement. */
+.avatar-with-badge {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+.e-badge.badge-hub-owner {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 40%);
+  background: var(--primary-lighter);
+  color: var(--primary);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 3px 6px;
+  height: auto;
+  min-width: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Procedures toolbar — Large (40px) buttons per the DS height scale */
+.e-btn.toolbar-btn {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+}
+
+/* Search bars — right-aligned clear (X) + search icon (C2: one truth per
+   decision — every search input in the app uses this layout, not just this
+   one), so all three need the same reserved right padding. */
+.procedures-search .e-input,
+.event-search .e-input,
+.guides-search .e-input {
+  padding-right: 52px !important;
+}
+
+/* Sidebar search — dark input on the navy sidebar, per the Figma Sidebar DS component */
+.sidebar-search .e-input-group,
+.sidebar-search.e-input-group {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.sidebar-search .e-input {
+  color: #fff !important;
+  padding-left: 28px !important;
+}
+.sidebar-search .e-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Sort/Date filter chips are DropDownButtons wearing the same .chip-btn look
+   (C2 — one truth per decision): hide the library's default caret so they
+   stay visually identical to the plain Button chips beside them. */
+.e-dropdown-btn.chip-btn .e-caret {
+  display: none;
+}
+
+/* Flyout surface (Shadow-lg) for the Sort by / Filter by date popups */
+.e-dropdown-popup {
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+/* Syncfusion collapses the popup to ~2px height rather than unmounting it on
+   close (marking it with .e-popup-close) — without this, our border above
+   still paints as a stray gray hairline under the filter chips row. */
+.e-dropdown-popup.e-popup-close {
+  display: none !important;
+}
+.e-dropdown-popup .e-list-parent {
+  padding: 0;
+  margin: 0;
+}
+/* The library's default .e-item is a fixed-height 30px single-line row —
+   override for our custom itemTemplate panels (Sort by / Filter by date),
+   which need to lay out multi-line, multi-control content. */
+.e-dropdown-popup ul .e-item {
+  height: auto !important;
+  line-height: normal !important;
+  white-space: normal !important;
+  padding: 0 !important;
+  display: block !important;
+}
+.e-dropdown-popup .e-item:hover,
+.e-dropdown-popup .e-item:focus {
+  background: transparent !important;
+}
+
+/* TextArea — Syncfusion tags the wrapper `e-auto-width` and leaves it at
+   `flex: 0 1 auto`, so inside a flex row it collapses to the textarea's
+   intrinsic width (~190px) instead of taking the remaining space. Force the
+   wrapper to grow and the control to fill it, so every comment/description box
+   spans the card it sits in. `min-width: 0` lets it shrink below that
+   intrinsic width too, otherwise it would overflow narrow containers. */
+.e-input-group.e-multi-line-input,
+.e-input-group.e-multi-line-input.e-auto-width {
+  flex: 1 1 0%;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+}
+.e-input-group.e-multi-line-input textarea.e-input {
+  width: 100%;
+  /* Vertical only: horizontal resize would drag the control back out of the
+     full-width fit above. */
+  resize: vertical;
+}
+
+/* Message (Alert) — Info severity bound to the DS info/info-lighter tokens
+   instead of the library's own teal default. Icon + color together carry the
+   meaning (C5), so the severity glyph stays on — that's Syncfusion-owned
+   chrome, the documented exception to the lucide-only icon rule (see the
+   Dialog close-icon note below for the same exception applied elsewhere).
+   Round Rectangle radius-8 per C4 (shape), Text-Small/Normal (14/20) is
+   already the library's own content size so it needs no override. */
+.e-message.e-info {
+  background-color: var(--info-lighter);
+  border-color: var(--info);
+  color: var(--content-text);
+  border-radius: 8px;
+}
+.e-message.e-info .e-msg-icon {
+  color: var(--info);
+}
+.e-message.e-info .e-msg-close-icon {
+  color: var(--icon);
+}
+.e-message.e-info .e-msg-close-icon:hover,
+.e-message.e-info .e-msg-close-icon:focus {
+  background-color: var(--surface-alt2);
+  box-shadow: none;
+}
+
+/* Dialog — scrim bound to Background/overlay-bg-color (C1: token, not the
+   library default it happens to be close to), surface/radius/elevation per
+   the modal-/card- family (radius-12, $Shadow-lg), and header/content/footer
+   spacing opened up from the library's dense 18px default to the 24px this
+   screen's dialogs use. */
+.e-dlg-overlay {
+  background-color: var(--overlay-bg-color) !important;
+}
+.e-dialog,
+.e-css.e-dialog {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+.e-dialog .e-dlg-header-content {
+  padding: 20px 24px 0;
+  border-bottom: 0;
+}
+.e-dialog .e-dlg-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--content-text);
+  white-space: normal;
+}
+.e-dialog .e-dlg-content {
+  padding: 12px 24px 20px;
+}
+.e-dialog .e-footer-content {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-light);
+}
+/* Close icon — Syncfusion renders it via its own e-icons glyph (the DS's
+   documented exception for library-owned chrome) but still ships Full Round
+   by default (C4 violation); square it off and match the other icon buttons'
+   colors/hover instead. */
+.e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: var(--icon);
+}
+.e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn:hover {
+  background: var(--surface-alt2) !important;
+  color: var(--icon-hover);
+}
+
+/* Data Grid (Tasks tab) — bind the library's default blue-gray chrome to the
+   DS neutrals: header on Background/content-bg-color-alt2, borders on
+   Border/border-light, body text on Foreground/content-text-color, radius-8
+   on the outer frame per C4 (the library ships square by default). */
+.e-grid.tasks-grid {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: inherit;
+}
+.e-grid.tasks-grid .e-gridheader {
+  background: var(--surface-alt2);
+  border-color: var(--border-light);
+}
+.e-grid.tasks-grid .e-headercell {
+  background: var(--surface-alt2);
+  border-color: var(--border-light);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--placeholder-text);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.e-grid.tasks-grid .e-headertext {
+  color: inherit;
+}
+.e-grid.tasks-grid .e-rowcell {
+  border-color: var(--border-light);
+  color: var(--content-text);
+  font-size: 14px;
+}
+.e-grid.tasks-grid .e-row:hover .e-rowcell {
+  background: var(--surface-alt2);
+}
+.e-grid.tasks-grid .e-altrow {
+  background: transparent;
+}
+
+/* Guides list-view grid — same base style as tasks-grid with sticky
+   first-two columns (checkbox + name) and sticky last column (actions). */
+.e-grid.guides-grid {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: inherit;
+}
+.e-grid.guides-grid .e-gridheader {
+  background: var(--surface-alt2);
+  border-color: var(--border-light);
+}
+.e-grid.guides-grid .e-headercell {
+  background: var(--surface-alt2);
+  border-color: var(--border-light);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--placeholder-text);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.e-grid.guides-grid .e-headertext {
+  color: inherit;
+}
+.e-grid.guides-grid .e-rowcell {
+  border-color: var(--border-light);
+  color: var(--content-text);
+  font-size: 14px;
+}
+.e-grid.guides-grid .e-row:hover .e-rowcell {
+  background: var(--surface-alt2);
+}
+.e-grid.guides-grid .e-altrow {
+  background: transparent;
+}
+
+/* Sticky columns: checkbox (col 1) + name (col 2) frozen left; actions (last col) frozen right */
+.e-grid.guides-grid .e-gridheader table,
+.e-grid.guides-grid .e-gridcontent table {
+  table-layout: fixed;
+}
+.e-grid.guides-grid .e-headercell:nth-child(1),
+.e-grid.guides-grid .e-headercell:nth-child(2),
+.e-grid.guides-grid .e-headercell:last-child {
+  position: sticky;
+  z-index: 4;
+  background: var(--surface-alt2);
+}
+.e-grid.guides-grid .e-rowcell:nth-child(1),
+.e-grid.guides-grid .e-rowcell:nth-child(2),
+.e-grid.guides-grid .e-rowcell:last-child {
+  position: sticky;
+  z-index: 3;
+  background: #ffffff;
+}
+.e-grid.guides-grid .e-headercell:nth-child(1),
+.e-grid.guides-grid .e-rowcell:nth-child(1) {
+  left: 0;
+}
+.e-grid.guides-grid .e-headercell:nth-child(2),
+.e-grid.guides-grid .e-rowcell:nth-child(2) {
+  left: 46px;
+  box-shadow: 2px 0 5px -2px rgba(0,0,0,0.12);
+}
+.e-grid.guides-grid .e-headercell:last-child,
+.e-grid.guides-grid .e-rowcell:last-child {
+  right: 0;
+  box-shadow: -2px 0 5px -2px rgba(0,0,0,0.12);
+}
+.e-grid.guides-grid .e-row:hover .e-rowcell:nth-child(1),
+.e-grid.guides-grid .e-row:hover .e-rowcell:nth-child(2),
+.e-grid.guides-grid .e-row:hover .e-rowcell:last-child {
+  background: var(--surface-alt2);
+}
+
+/* Context Menu (task card "…") — Shadow-lg flyout per the modal/flyout
+   elevation family, Round Rectangle radius-8 (C4). Delete is always the last
+   item, so it's targeted structurally rather than needing a per-item variant
+   prop the library doesn't have — danger color pairs with its position, not
+   color alone (C5, since "last item" is itself a stable structural cue here). */
+.e-contextmenu-wrapper.task-card-menu,
+.e-contextmenu-container.task-card-menu {
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.e-contextmenu-wrapper.task-card-menu ul,
+.e-contextmenu-container.task-card-menu ul {
+  padding: 4px;
+}
+.e-contextmenu-wrapper.task-card-menu .e-menu-item,
+.e-contextmenu-container.task-card-menu .e-menu-item {
+  border-radius: 6px;
+  color: var(--content-text);
+  font-size: 14px;
+}
+.e-contextmenu-wrapper.task-card-menu .e-menu-item:hover,
+.e-contextmenu-container.task-card-menu .e-menu-item:hover {
+  background: var(--surface-alt2);
+}
+
+/* PivotView (Training matrix) — same neutral chrome as the Tasks Data Grid,
+   bound to the DS tokens instead of the library's own blue-gray default. */
+.e-pivotview.training-pivot {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: inherit;
+}
+.e-pivotview.training-pivot .e-headercell,
+.e-pivotview.training-pivot .e-columnsheader {
+  background: var(--surface-alt2);
+  border-color: var(--border-light);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--placeholder-text);
+}
+.e-pivotview.training-pivot .e-rowcell,
+.e-pivotview.training-pivot .e-valuescontent {
+  border-color: var(--border-light);
+  color: var(--content-text);
+  font-size: 14px;
+}
+.e-pivotview.training-pivot .e-summary,
+.e-pivotview.training-pivot .e-gtot {
+  background: var(--surface-alt2);
+  font-weight: 600;
+}

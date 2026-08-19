@@ -1,0 +1,39 @@
+{
+  "name": "argonaut-changeover-demo",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@syncfusion/ej2-base": "^33.2.0",
+    "@syncfusion/ej2-notifications": "^33.2.7",
+    "@syncfusion/ej2-react-buttons": "^33.2.0",
+    "@syncfusion/ej2-react-calendars": "^33.2.15",
+    "@syncfusion/ej2-react-dropdowns": "^33.2.15",
+    "@syncfusion/ej2-react-grids": "^33.2.12",
+    "@syncfusion/ej2-react-inputs": "^33.2.0",
+    "@syncfusion/ej2-react-layouts": "^33.2.3",
+    "@syncfusion/ej2-react-navigations": "^33.2.0",
+    "@syncfusion/ej2-react-notifications": "^33.2.7",
+    "@syncfusion/ej2-react-pivotview": "^33.2.6",
+    "@syncfusion/ej2-react-popups": "^33.2.7",
+    "@syncfusion/ej2-react-splitbuttons": "^33.2.6",
+    "lucide-react": "^1.28.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}
