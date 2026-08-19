@@ -66,7 +66,7 @@ export function TopBar({ page, onNavigate, procedureName, taskName, trainingName
   // layout shrink the header itself to help everything fit — this pins it at
   // the full h-16, with the body scrolling instead.
   return (
-    <header className="flex shrink-0 items-center justify-between px-6 h-16 border-b border-border-light bg-white">
+    <header className="sticky top-0 z-10 flex shrink-0 items-center justify-between px-6 h-16 border-b border-border-light bg-white">
       <div className="flex items-center gap-2.5">
         {items.length > 0 && (
           /* enableNavigation={false} is required: left on, Syncfusion follows each
